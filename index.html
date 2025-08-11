@@ -2,6 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Slotter - Scheduling Made Simple</title>
   <link rel="stylesheet" href="style.css" />
@@ -10,12 +11,14 @@
 <body>
   <header class="header">
     <div class="container">
-      <div class="logo">Slotter</div>
+      <div class="logo">
+        <img src="assets/logo.png" alt="Slotter logo" />
+      </div>  <!-- close logo div -->
       <nav>
         <a href="#features">Features</a>
         <a href="#signup">Get Early Access</a>
       </nav>
-    </div>
+    </div> <!-- close container -->
   </header>
 
   <section class="hero">
@@ -79,19 +82,29 @@
   <section id="signup" class="signup-section">
     <div class="container">
       <h2>Be the first to know when we launch</h2>
-      <form id="emailForm" class="email-form" autocomplete="off">
+      <form
+        id="emailForm"
+        class="email-form"
+        autocomplete="off"
+        method="POST"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSdocCK88l3POhLL7IDp5bT1iJQpHba9StuOZtZsMPwprJoN0Q/formResponse"
+        target="hidden_iframe"
+      >
         <input
           type="email"
+          name="entry.1082062929"
           placeholder="Your email address"
           required
-          name="email"
           aria-label="Email address"
         />
         <button type="submit" class="btn">Notify Me</button>
       </form>
-      <p class="disclaimer">No spam, just updates. You can unsubscribe anytime.</p>
+      <p class="disclaimer">No spam, just updates.</p>
+      <p id="formMessage" style="margin-top:1rem; font-weight:600;"></p>
     </div>
   </section>
+
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
   <footer class="footer">
     <div class="container">

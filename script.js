@@ -12,7 +12,7 @@ function checkVisibility() {
 window.addEventListener('scroll', checkVisibility);
 window.addEventListener('load', checkVisibility);
 
-// Testimonial slider logic
+// Testimonial slider logic (if you add testimonials later)
 const testimonials = document.querySelectorAll('.testimonial');
 let currentTestimonial = 0;
 
@@ -30,11 +30,12 @@ function nextTestimonial() {
 
 setInterval(nextTestimonial, 4000);
 
-// Animate mockup image on scroll
+// Animate mockup image on scroll (if you add mockup later)
 const mockupSection = document.querySelector('.mockup-section');
 const mockupImage = document.querySelector('.mockup img');
 
 function checkMockupVisibility() {
+  if (!mockupSection || !mockupImage) return;
   const rect = mockupSection.getBoundingClientRect();
   if(rect.top < window.innerHeight - 150) {
     mockupImage.classList.add('visible');
@@ -44,12 +45,35 @@ function checkMockupVisibility() {
 window.addEventListener('scroll', checkMockupVisibility);
 window.addEventListener('load', checkMockupVisibility);
 
-// Email form submission (no backend, just thank you message)
-document.getElementById('emailForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const emailInput = e.target.email;
-  if(emailInput.value.trim()) {
-    alert(`Thanks for signing up, ${emailInput.value.trim()}! We’ll notify you when Shiftly launches.`);
-    emailInput.value = '';
+// Email form submission with validation and Google Forms submission
+const emailForm = document.getElementById('emailForm');
+const formMessage = document.getElementById('formMessage');
+
+emailForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // prevent default form submission to do validation first
+
+  const emailInput = this.querySelector('input[name="entry.1082062929"]');
+  const email = emailInput.value.trim();
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    formMessage.textContent = 'Please enter a valid email address.';
+    formMessage.style.color = 'red';
+    emailInput.focus();
+    return;
   }
+
+  formMessage.textContent = 'Submitting your email...';
+  formMessage.style.color = '#fff';
+
+  // Submit form to Google Forms via hidden iframe
+  this.submit();
+
+  // After submission clear form and show thank you
+  emailInput.value = '';
+  setTimeout(() => {
+    formMessage.textContent = 'Thank you! You are signed up.';
+    formMessage.style.color = '#00ff00';
+  }, 1500);
 });

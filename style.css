@@ -38,6 +38,11 @@ body {
   color: #222;
   letter-spacing: 0.05em;
 }
+.logo img {
+  height: 70px;  /* or whatever fits your header nicely */
+  width: auto;
+  vertical-align: middle;
+}
 nav a {
   color: #444;
   font-weight: 600;
